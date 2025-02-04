@@ -40,6 +40,11 @@ app.use (bodyParser.json());
 // Register routes
 app.use('/api/auth',authRoutes)
 
+
+app.use('/',(req,res)=>{
+    res.send("<h1>Welcome To CMS Portal</h1>")
+})
+
 // Start the Express server on the specified port
 app.listen(PORT, () => {
     // Log a message indicating the server is running
