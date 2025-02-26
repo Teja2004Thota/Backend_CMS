@@ -24,6 +24,28 @@ exports.getComplaintsByDomain = async (req, res) => {
     }
     
 };
+
+// Get complaint by ID
+exports.getComplaintById = async (req, res) => {
+    try {
+        const complaint = await Complaint.findById(req.params.id);
+
+        if (complaint) {
+            console.log(`Complaint found with ID: ${req.params.id}`);
+
+            res.status(200).json({
+                complaint: complaint
+            });
+        } else {
+            res.status(404).json({ message: `No complaint found with ID: ${req.params.id}` });
+            console.log(`No complaint found with ID: ${req.params.id}`);
+        }
+    } catch (error) {
+        console.error(`Error fetching complaint with ID ${req.params.id}: ${error.message}`);
+        res.status(500).json({ message: 'Error fetching complaint', error: error.message });
+    }
+};
+
 //--------------------------------------------------------------------------------------------------
 // Update complaint status (Sub Admin)
 exports.updateComplaintStatus = async (req, res) => {
